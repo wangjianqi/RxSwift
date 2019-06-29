@@ -37,9 +37,11 @@ class SimpleValidationViewController : ViewController {
             .map { $0.count >= minimalPasswordLength }
             .share(replay: 1)
 
+        ///合并
         let everythingValid = Observable.combineLatest(usernameValid, passwordValid) { $0 && $1 }
             .share(replay: 1)
 
+        ///账号绑定密码框
         usernameValid
             .bind(to: passwordOutlet.rx.isEnabled)
             .disposed(by: disposeBag)
@@ -52,6 +54,7 @@ class SimpleValidationViewController : ViewController {
             .bind(to: passwordValidOutlet.rx.isHidden)
             .disposed(by: disposeBag)
 
+        ///合并之后绑定按钮
         everythingValid
             .bind(to: doSomethingOutlet.rx.isEnabled)
             .disposed(by: disposeBag)

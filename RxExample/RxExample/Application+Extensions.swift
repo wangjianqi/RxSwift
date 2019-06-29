@@ -15,6 +15,7 @@
 #endif
 
 extension OSApplication {
+    ///是否测试
     static var isInUITest: Bool {
         return ProcessInfo.processInfo.environment["isUITest"] != nil;
     }

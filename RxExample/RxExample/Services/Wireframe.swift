@@ -32,6 +32,7 @@ class DefaultWireframe: Wireframe {
         #if os(iOS)
             UIApplication.shared.openURL(url)
         #elseif os(macOS)
+        ///OS
             NSWorkspace.shared.open(url)
         #endif
     }
@@ -56,6 +57,7 @@ class DefaultWireframe: Wireframe {
         #if os(iOS)
         return Observable.create { observer in
             let alertView = UIAlertController(title: "RxExample", message: message, preferredStyle: .alert)
+            ///取消
             alertView.addAction(UIAlertAction(title: cancelAction.description, style: .cancel) { _ in
                 observer.on(.next(cancelAction))
             })

@@ -51,6 +51,7 @@ class GithubSignupViewModel1 {
             wireframe: Wireframe
         )
     ) {
+        ///接口
         let API = dependency.API
         let validationService = dependency.validationService
         let wireframe = dependency.wireframe
@@ -82,6 +83,7 @@ class GithubSignupViewModel1 {
         let signingIn = ActivityIndicator()
         self.signingIn = signingIn.asObservable()
 
+        ///用户名和密码
         let usernameAndPassword = Observable.combineLatest(input.username, input.password) { (username: $0, password: $1) }
 
         signedIn = input.loginTaps.withLatestFrom(usernameAndPassword)

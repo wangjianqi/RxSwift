@@ -10,6 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
+///msg
 extension ValidationResult: CustomStringConvertible {
     var description: String {
         switch self {
@@ -25,11 +26,13 @@ extension ValidationResult: CustomStringConvertible {
     }
 }
 
+///颜色
 struct ValidationColors {
     static let okColor = UIColor(red: 138.0 / 255.0, green: 221.0 / 255.0, blue: 109.0 / 255.0, alpha: 1.0)
     static let errorColor = UIColor.red
 }
 
+///颜色
 extension ValidationResult {
     var textColor: UIColor {
         switch self {

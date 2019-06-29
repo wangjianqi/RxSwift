@@ -12,6 +12,7 @@ import RxSwift
 import RxCocoa
 
 private extension Reactive where Base: UILabel {
+    ///类型
     var coordinates: Binder<CLLocationCoordinate2D> {
         return Binder(base) { label, location in
             label.text = "Lat: \(location.latitude)\nLon: \(location.longitude)"
@@ -33,14 +34,17 @@ class GeolocationViewController: ViewController {
         
         let geolocationService = GeolocationService.instance
         
+        ///是否有权限
         geolocationService.authorized
             .drive(noGeolocationView.rx.isHidden)
             .disposed(by: disposeBag)
         
         geolocationService.location
+            ///显示经纬度
             .drive(label.rx.coordinates)
             .disposed(by: disposeBag)
         
+        ///跳转到设置
         button.rx.tap
             .bind { [weak self] _ -> Void in
                 self?.openAppPreferences()
