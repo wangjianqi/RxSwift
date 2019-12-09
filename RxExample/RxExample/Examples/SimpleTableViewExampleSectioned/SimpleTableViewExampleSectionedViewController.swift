@@ -16,11 +16,13 @@ class SimpleTableViewExampleSectionedViewController
     @IBOutlet weak var tableView: UITableView!
 
     let dataSource = RxTableViewSectionedReloadDataSource<SectionModel<String, Double>>(
+        //cell
         configureCell: { (_, tv, indexPath, element) in
             let cell = tv.dequeueReusableCell(withIdentifier: "Cell")!
             cell.textLabel?.text = "\(element) @ row \(indexPath.row)"
             return cell
         },
+        //header
         titleForHeaderInSection: { dataSource, sectionIndex in
             return dataSource[sectionIndex].model
         }
@@ -56,7 +58,9 @@ class SimpleTableViewExampleSectionedViewController
 
         tableView.rx
             .itemSelected
+            //转化
             .map { indexPath in
+                //返回类型
                 return (indexPath, dataSource[indexPath])
             }
             .subscribe(onNext: { pair in
@@ -64,6 +68,7 @@ class SimpleTableViewExampleSectionedViewController
             })
             .disposed(by: disposeBag)
 
+        //设置代理
         tableView.rx
             .setDelegate(self)
             .disposed(by: disposeBag)

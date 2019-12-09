@@ -15,11 +15,12 @@ class SimpleTableViewExampleViewController : ViewController, UITableViewDelegate
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        //生成数据
         let items = Observable.just(
             (0..<20).map { "\($0)" }
         )
 
+        //绑定数据 items
         items
             .bind(to: tableView.rx.items(cellIdentifier: "Cell", cellType: UITableViewCell.self)) { (row, element, cell) in
                 cell.textLabel?.text = "\(element) @ row \(row)"
@@ -27,6 +28,7 @@ class SimpleTableViewExampleViewController : ViewController, UITableViewDelegate
             .disposed(by: disposeBag)
 
 
+        //点击cell
         tableView.rx
             .modelSelected(String.self)
             .subscribe(onNext:  { value in
@@ -34,6 +36,7 @@ class SimpleTableViewExampleViewController : ViewController, UITableViewDelegate
             })
             .disposed(by: disposeBag)
 
+        //点击附件
         tableView.rx
             .itemAccessoryButtonTapped
             .subscribe(onNext: { indexPath in

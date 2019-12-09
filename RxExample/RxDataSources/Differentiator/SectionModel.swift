@@ -8,10 +8,12 @@
 
 import Foundation
 
+//Section泛型
 public struct SectionModel<Section, ItemType> {
     public var model: Section
     public var items: [Item]
 
+    //构造方法
     public init(model: Section, items: [Item]) {
         self.model = model
         self.items = items
@@ -21,8 +23,10 @@ public struct SectionModel<Section, ItemType> {
 extension SectionModel
     : SectionModelType {
     public typealias Identity = Section
+    //定义Item
     public typealias Item = ItemType
-    
+
+    //增加属性
     public var identity: Section {
         return model
     }
