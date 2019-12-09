@@ -17,7 +17,9 @@ extension ObservableType {
      - parameter subscribe: Implementation of the resulting observable sequence's `subscribe` method.
      - returns: The observable sequence with the specified implementation for the `subscribe` method.
      */
+    //创建序列
     public static func create(_ subscribe: @escaping (AnyObserver<Element>) -> Disposable) -> Observable<Element> {
+        //匿名可观察序列
         return AnonymousObservable(subscribe)
     }
 }
@@ -61,11 +63,12 @@ final private class AnonymousObservableSink<Observer: ObserverType>: Sink<Observ
     }
 }
 
+//匿名可观察序列 继承Producer
 final private class AnonymousObservable<Element>: Producer<Element> {
     typealias SubscribeHandler = (AnyObserver<Element>) -> Disposable
 
     let _subscribeHandler: SubscribeHandler
-
+    // 保存外界的闭包
     init(_ subscribeHandler: @escaping SubscribeHandler) {
         self._subscribeHandler = subscribeHandler
     }

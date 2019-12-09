@@ -10,6 +10,7 @@ extension Disposable {
     /// Adds `self` to `bag`
     ///
     /// - parameter bag: `DisposeBag` to add `self` to.
+    //实现销毁
     public func disposed(by bag: DisposeBag) {
         bag.insert(self)
     }

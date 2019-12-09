@@ -9,5 +9,6 @@
 /// Represents a disposable resource.
 public protocol Disposable {
     /// Dispose resource.
+    //销毁
     func dispose()
 }

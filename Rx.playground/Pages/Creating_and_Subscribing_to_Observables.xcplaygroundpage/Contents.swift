@@ -47,7 +47,7 @@ example("empty") {
  */
 example("just") {
     let disposeBag = DisposeBag()
-    
+    // just:单次
     Observable.just("🔴")
         .subscribe { event in
             print(event)
@@ -61,7 +61,7 @@ example("just") {
  */
 example("of") {
     let disposeBag = DisposeBag()
-    
+    //固定元素
     Observable.of("🐶", "🐱", "🐭", "🐹")
         .subscribe(onNext: { element in
             print(element)
@@ -84,7 +84,7 @@ example("of") {
  */
 example("from") {
     let disposeBag = DisposeBag()
-    
+    // 从集合
     Observable.from(["🐶", "🐱", "🐭", "🐹"])
         .subscribe(onNext: { print($0) })
         .disposed(by: disposeBag)
@@ -97,7 +97,7 @@ example("from") {
 */
 example("create") {
     let disposeBag = DisposeBag()
-    
+    //自定义可观察序列
     let myJust = { (element: String) -> Observable<String> in
         return Observable.create { observer in
             observer.on(.next(element))
@@ -117,7 +117,7 @@ example("create") {
  */
 example("range") {
     let disposeBag = DisposeBag()
-    
+    // 范围
     Observable.range(start: 1, count: 10)
         .subscribe { print($0) }
         .disposed(by: disposeBag)
@@ -129,7 +129,7 @@ example("range") {
  */
 example("repeatElement") {
     let disposeBag = DisposeBag()
-    
+    //指定次数
     Observable.repeatElement("🔴")
         .take(3)
         .subscribe(onNext: { print($0) })
@@ -143,7 +143,7 @@ example("repeatElement") {
  */
 example("generate") {
     let disposeBag = DisposeBag()
-    
+    //生成
     Observable.generate(
             initialState: 0,
             condition: { $0 < 3 },
@@ -158,6 +158,7 @@ example("generate") {
  Creates a new `Observable` sequence for each subscriber. [More info](http://reactivex.io/documentation/operators/defer.html)
  */
 example("deferred") {
+    //deferred：延期
     let disposeBag = DisposeBag()
     var count = 1
     
@@ -188,6 +189,7 @@ example("deferred") {
  Creates an `Observable` sequence that emits no items and immediately terminates with an error.
  */
 example("error") {
+    //错误
     let disposeBag = DisposeBag()
         
     Observable<Int>.error(TestError.test)
@@ -200,6 +202,7 @@ example("error") {
  Invokes a side-effect action for each emitted event and returns (passes through) the original event. [More info](http://reactivex.io/documentation/operators/do.html)
  */
 example("doOn") {
+    //为每个发出的事件调用一个副作用操作并返回(通过)原始事件
     let disposeBag = DisposeBag()
     
     Observable.of("🍎", "🍐", "🍊", "🍋")

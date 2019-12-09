@@ -17,5 +17,6 @@ public protocol ObservableConvertibleType {
     /// Converts `self` to `Observable` sequence.
     ///
     /// - returns: Observable sequence that represents `self`.
+    //可观察的
     func asObservable() -> Observable<Element>
 }

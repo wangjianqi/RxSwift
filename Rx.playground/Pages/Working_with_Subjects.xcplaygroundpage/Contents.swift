@@ -35,6 +35,7 @@ func writeSequenceToConsole<Source: ObservableType>(name: String, sequence: Sour
  ![](https://raw.githubusercontent.com/kzaher/rxswiftcontent/master/MarbleDiagrams/png/publishsubject.png "PublishSubject")
  */
 example("PublishSubject") {
+    //在订阅时向所有观察员广播新事件
     let disposeBag = DisposeBag()
     let subject = PublishSubject<String>()
     
@@ -54,6 +55,7 @@ example("PublishSubject") {
  ![](https://raw.githubusercontent.com/kzaher/rxswiftcontent/master/MarbleDiagrams/png/replaysubject.png)
 */
 example("ReplaySubject") {
+    //将新事件广播给所有订阅者，并将先前事件的指定缓冲大小号广播给新订阅者。
     let disposeBag = DisposeBag()
     let subject = ReplaySubject<String>.create(bufferSize: 1)
     
@@ -72,6 +74,7 @@ Broadcasts new events to all subscribers, and the most recent (or initial) value
 ![](https://raw.githubusercontent.com/kzaher/rxswiftcontent/master/MarbleDiagrams/png/behaviorsubject.png)
 */
 example("BehaviorSubject") {
+    //向所有订阅者广播新事件，并向新订阅者广播最近的(或初始的)值。
     let disposeBag = DisposeBag()
     let subject = BehaviorSubject(value: "🔴")
     

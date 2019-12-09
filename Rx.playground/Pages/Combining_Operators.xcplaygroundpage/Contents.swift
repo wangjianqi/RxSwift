@@ -16,6 +16,7 @@ Emits the specified sequence of elements before beginning to emit the elements f
 ![](https://raw.githubusercontent.com/kzaher/rxswiftcontent/master/MarbleDiagrams/png/startwith.png)
 */
 example("startWith") {
+    //在开始从源观察对象发出元素之前，发出指定的元素序列
     let disposeBag = DisposeBag()
     
     Observable.of("🐶", "🐱", "🐭", "🐹")
@@ -90,6 +91,7 @@ example("zip") {
  ![](https://raw.githubusercontent.com/kzaher/rxswiftcontent/master/MarbleDiagrams/png/combinelatest.png)
  */
 example("combineLatest") {
+//将8源可观测序列组合成一个新的观测序列,并将开始发出联合观测序列的每个源的最新元素可观测序列一旦所有排放源序列至少有一个元素,并且当源可观测序列发出的任何一个新元素
     let disposeBag = DisposeBag()
     
     let stringSubject = PublishSubject<String>()
@@ -148,7 +150,7 @@ example("switchLatest") {
     subject1.onNext("🏀")
     
     subjectsSubject.onNext(subject2)
-    
+    //注意这里没有执行
     subject1.onNext("⚾️")
     
     subject2.onNext("🍐")
