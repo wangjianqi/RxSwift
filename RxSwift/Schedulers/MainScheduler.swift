@@ -32,7 +32,7 @@ public final class MainScheduler : SerialDispatchQueueScheduler {
         self._mainQueue = DispatchQueue.main
         super.init(serialQueue: self._mainQueue)
     }
-
+    /// 主线程
     /// Singleton instance of `MainScheduler`
     public static let instance = MainScheduler()
 

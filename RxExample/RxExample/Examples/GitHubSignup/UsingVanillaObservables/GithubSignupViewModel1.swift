@@ -21,6 +21,7 @@ This is example where view model is mutable. Some consider this to be MVVM, some
  Please note that there is no explicit state, outputs are defined using inputs and dependencies.
  Please note that there is no dispose bag, because no subscription is being made.
 */
+// viewModel
 class GithubSignupViewModel1 {
     // outputs {
 
@@ -28,7 +29,7 @@ class GithubSignupViewModel1 {
     let validatedPassword: Observable<ValidationResult>
     let validatedPasswordRepeated: Observable<ValidationResult>
 
-    // Is signup button enabled
+    // Is signup button enabled: bool类型
     let signupEnabled: Observable<Bool>
 
     // Has user signed in
@@ -64,6 +65,7 @@ class GithubSignupViewModel1 {
         */
 
         validatedUsername = input.username
+            //flatMap
             .flatMapLatest { username in
                 return validationService.validateUsername(username)
                     .observeOn(MainScheduler.instance)
@@ -72,6 +74,7 @@ class GithubSignupViewModel1 {
             .share(replay: 1)
 
         validatedPassword = input.password
+            //map
             .map { password in
                 return validationService.validatePassword(password)
             }
@@ -85,16 +88,18 @@ class GithubSignupViewModel1 {
 
         ///用户名和密码
         let usernameAndPassword = Observable.combineLatest(input.username, input.password) { (username: $0, password: $1) }
-
+        /// 登录事件
         signedIn = input.loginTaps.withLatestFrom(usernameAndPassword)
             .flatMapLatest { pair in
                 return API.signup(pair.username, password: pair.password)
                     .observeOn(MainScheduler.instance)
                     .catchErrorJustReturn(false)
+                    //追踪
                     .trackActivity(signingIn)
             }
             .flatMapLatest { loggedIn -> Observable<Bool> in
                 let message = loggedIn ? "Mock: Signed in to GitHub." : "Mock: Sign in to GitHub failed"
+                //弹框
                 return wireframe.promptFor(message, cancelAction: "OK", actions: [])
                     // propagate original value
                     .map { _ in
@@ -114,6 +119,7 @@ class GithubSignupViewModel1 {
                 repeatPassword.isValid &&
                 !signingIn
             }
+            //distinct:明显的，独特的
             .distinctUntilChanged()
             .share(replay: 1)
     }

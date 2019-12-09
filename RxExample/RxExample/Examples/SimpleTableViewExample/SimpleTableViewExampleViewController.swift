@@ -36,7 +36,7 @@ class SimpleTableViewExampleViewController : ViewController, UITableViewDelegate
             })
             .disposed(by: disposeBag)
 
-        //点击附件
+        //点击附件事件
         tableView.rx
             .itemAccessoryButtonTapped
             .subscribe(onNext: { indexPath in

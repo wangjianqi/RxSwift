@@ -9,7 +9,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
-
+//隐藏
 func dismissViewController(_ viewController: UIViewController, animated: Bool) {
     if viewController.isBeingDismissed || viewController.isBeingPresented {
         DispatchQueue.main.async {
@@ -52,7 +52,7 @@ extension Reactive where Base: UIImagePickerController {
 
             parent.present(imagePicker, animated: animated, completion: nil)
             observer.on(.next(imagePicker))
-            
+            //隐藏
             return Disposables.create(dismissDisposable, Disposables.create {
                     dismissViewController(imagePicker, animated: animated)
                 })

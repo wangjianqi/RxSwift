@@ -27,6 +27,7 @@ public struct Binder<Value>: ObserverType {
     /// - parameter target: Target object.
     /// - parameter scheduler: Scheduler used to bind the events.
     /// - parameter binding: Binding logic.
+    // 构造方法
     public init<Target: AnyObject>(_ target: Target, scheduler: ImmediateSchedulerType = MainScheduler(), binding: @escaping (Target, Value) -> Void) {
         weak var weakTarget = target
 

@@ -61,7 +61,7 @@ class APIWrappersViewController: ViewController {
         datePicker.date = Date(timeIntervalSince1970: 0)
 
         // MARK: UIBarButtonItem
-
+        //tap事件
         bbitem.rx.tap
             .subscribe(onNext: { [weak self] x in
                 self?.debug("UIBarButtonItem Tapped")
@@ -71,6 +71,7 @@ class APIWrappersViewController: ViewController {
         // MARK: UISegmentedControl
 
         // also test two way binding
+        //Relay:转播
         let segmentedValue = BehaviorRelay(value: 0)
         _ = segmentedControl.rx.value <-> segmentedValue
 
@@ -144,6 +145,7 @@ class APIWrappersViewController: ViewController {
         if #available(iOS 11.2, *) {
             // also test two way binding
             let textValue = BehaviorRelay(value: "")
+            //输入
             _ = textField.rx.textInput <-> textValue
 
             textValue.asObservable()
@@ -153,6 +155,7 @@ class APIWrappersViewController: ViewController {
                 .disposed(by: disposeBag)
 
             let attributedTextValue = BehaviorRelay<NSAttributedString?>(value: NSAttributedString(string: ""))
+            // attributedText
             _ = textField2.rx.attributedText <-> attributedTextValue
 
             attributedTextValue.asObservable()
@@ -163,7 +166,7 @@ class APIWrappersViewController: ViewController {
         }
 
         // MARK: UIGestureRecognizer
-
+        // 滑动手势
         mypan.rx.event
             .subscribe(onNext: { [weak self] x in
                 self?.debug("UIGestureRecognizer event \(x.state.rawValue)")
@@ -201,6 +204,7 @@ class APIWrappersViewController: ViewController {
             })
             .disposed(by: disposeBag)
 
+        // 失败
         _ = manager.rx.didFailWithError
             .subscribe(onNext: { x in
                 print("rx.didFailWithError \(x)")

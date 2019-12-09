@@ -8,6 +8,7 @@
 
 
 extension String {
+    //转码
     var URLEscaped: String {
        return self.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? ""
     }

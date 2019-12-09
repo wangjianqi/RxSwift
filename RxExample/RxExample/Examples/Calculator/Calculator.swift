@@ -13,6 +13,7 @@ enum Operator {
     case division
 }
 
+//操作
 enum CalculatorCommand {
     case clear
     case changeSign
@@ -30,6 +31,7 @@ enum CalculatorState {
 }
 
 extension CalculatorState {
+    //初始值
     static let initial = CalculatorState.oneOperand(screen: "0")
 
     func mapScreen(transform: (String) -> String) -> CalculatorState {
@@ -53,7 +55,7 @@ extension CalculatorState {
             return screen
         }
     }
-
+    //
     var sign: String {
         switch self {
         case .oneOperand:
@@ -68,6 +70,7 @@ extension CalculatorState {
 
 
 extension CalculatorState {
+    // reduce
     static func reduce(state: CalculatorState, _ x: CalculatorCommand) -> CalculatorState {
         switch x {
         case .clear:
@@ -100,7 +103,7 @@ extension CalculatorState {
         }
     }
 }
-
+//操作符
 extension Operator {
     var sign: String {
         switch self {

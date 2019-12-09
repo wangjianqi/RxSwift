@@ -19,8 +19,10 @@ enum RetryResult {
     case cancel
 }
 
+// Wireframe(线框)
 protocol Wireframe {
     func open(url: URL)
+    //prompt:提示
     func promptFor<Action: CustomStringConvertible>(_ message: String, cancelAction: Action, actions: [Action]) -> Observable<Action>
 }
 
@@ -53,12 +55,15 @@ class DefaultWireframe: Wireframe {
         #endif
     }
 
+    //弹框
     func promptFor<Action : CustomStringConvertible>(_ message: String, cancelAction: Action, actions: [Action]) -> Observable<Action> {
         #if os(iOS)
+        //create
         return Observable.create { observer in
             let alertView = UIAlertController(title: "RxExample", message: message, preferredStyle: .alert)
             ///取消
             alertView.addAction(UIAlertAction(title: cancelAction.description, style: .cancel) { _ in
+                //下一步
                 observer.on(.next(cancelAction))
             })
 
@@ -69,7 +74,7 @@ class DefaultWireframe: Wireframe {
             }
 
             DefaultWireframe.rootViewController().present(alertView, animated: true, completion: nil)
-
+            //隐藏
             return Disposables.create {
                 alertView.dismiss(animated:false, completion: nil)
             }

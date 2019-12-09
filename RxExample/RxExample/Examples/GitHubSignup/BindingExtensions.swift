@@ -12,6 +12,7 @@ import RxCocoa
 
 ///msg
 extension ValidationResult: CustomStringConvertible {
+    //描述
     var description: String {
         switch self {
         case let .ok(message):
@@ -49,6 +50,7 @@ extension ValidationResult {
 }
 
 extension Reactive where Base: UILabel {
+    //validation:生效
     var validationResult: Binder<ValidationResult> {
         return Binder(base) { label, result in
             label.textColor = result.textColor

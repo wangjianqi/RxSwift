@@ -84,6 +84,7 @@ class GitHubDefaultValidationService: GitHubValidationService {
 class GitHubDefaultAPI : GitHubAPI {
     let URLSession: Foundation.URLSession
 
+    //
     static let sharedAPI = GitHubDefaultAPI(
         URLSession: Foundation.URLSession.shared
     )
@@ -109,6 +110,7 @@ class GitHubDefaultAPI : GitHubAPI {
         let signupResult = arc4random() % 5 == 0 ? false : true
         
         return Observable.just(signupResult)
+            //延迟
             .delay(.seconds(1), scheduler: MainScheduler.instance)
     }
 }

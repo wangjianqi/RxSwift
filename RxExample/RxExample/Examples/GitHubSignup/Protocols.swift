@@ -14,6 +14,7 @@ enum ValidationResult {
     case ok(message: String)
     case empty
     case validating
+    ///失败
     case failed(message: String)
 }
 
@@ -21,11 +22,13 @@ enum SignupState {
     case signedUp(signedUp: Bool)
 }
 
+//Api协议
 protocol GitHubAPI {
     func usernameAvailable(_ username: String) -> Observable<Bool>
     func signup(_ username: String, password: String) -> Observable<Bool>
 }
 
+//验证协议
 protocol GitHubValidationService {
     ///名字验证
     func validateUsername(_ username: String) -> Observable<ValidationResult>

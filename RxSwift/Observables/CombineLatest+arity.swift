@@ -20,6 +20,7 @@ extension ObservableType {
     - parameter resultSelector: Function to invoke whenever any of the sources produces an element.
     - returns: An observable sequence containing the result of combining elements of the sources using the specified result selector function.
     */
+    // 合并
     public static func combineLatest<O1: ObservableType, O2: ObservableType>
         (_ source1: O1, _ source2: O2, resultSelector: @escaping (O1.Element, O2.Element) throws -> Element)
             -> Observable<Element> {

@@ -197,6 +197,7 @@ extension Reactive where Base: CLLocationManager {
     /**
     Reactive wrapper for `delegate` message.
     */
+    // 权限变化
     public var didChangeAuthorizationStatus: Observable<CLAuthorizationStatus> {
         return delegate.methodInvoked(#selector(CLLocationManagerDelegate.locationManager(_:didChangeAuthorization:)))
             .map { a in

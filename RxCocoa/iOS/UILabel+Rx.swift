@@ -14,6 +14,7 @@ import UIKit
 extension Reactive where Base: UILabel {
     
     /// Bindable sink for `text` property.
+    // 类型String
     public var text: Binder<String?> {
         return Binder(self.base) { label, text in
             label.text = text

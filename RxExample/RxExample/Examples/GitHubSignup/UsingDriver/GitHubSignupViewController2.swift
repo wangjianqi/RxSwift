@@ -31,6 +31,7 @@ class GitHubSignupViewController2 : ViewController {
                 username: usernameOutlet.rx.text.orEmpty.asDriver(),
                 password: passwordOutlet.rx.text.orEmpty.asDriver(),
                 repeatedPassword: repeatedPasswordOutlet.rx.text.orEmpty.asDriver(),
+                //信号
                 loginTaps: signupOutlet.rx.tap.asSignal()
             ),
             dependency: (

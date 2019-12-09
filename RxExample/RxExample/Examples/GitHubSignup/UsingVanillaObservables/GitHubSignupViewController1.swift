@@ -79,6 +79,7 @@ class GitHubSignupViewController1 : ViewController {
 
         ///结束编辑
         let tapBackground = UITapGestureRecognizer()
+        //事件
         tapBackground.rx.event
             .subscribe(onNext: { [weak self] _ in
                 self?.view.endEditing(true)

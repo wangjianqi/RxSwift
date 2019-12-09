@@ -11,8 +11,9 @@ import RxSwift
 import RxCocoa
 
 class CalculatorViewController: ViewController {
-
+    //显示操作符
     @IBOutlet weak var lastSignLabel: UILabel!
+    //结果
     @IBOutlet weak var resultLabel: UILabel!
     
     @IBOutlet weak var allClearButton: UIButton!
