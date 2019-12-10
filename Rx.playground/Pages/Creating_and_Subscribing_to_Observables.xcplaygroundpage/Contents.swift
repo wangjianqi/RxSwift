@@ -17,6 +17,7 @@ import RxSwift
 example("never") {
     //创建一个永不终止且永不发出任何事件的序列
     let disposeBag = DisposeBag()
+    //never
     let neverSequence = Observable<String>.never()
     
     let neverSequenceSubscription = neverSequence
@@ -32,6 +33,7 @@ example("never") {
  Creates an empty `Observable` sequence that only emits a Completed event. [More info](http://reactivex.io/documentation/operators/empty-never-throw.html)
  */
 example("empty") {
+    //创建一个空的可观察序列，该序列只发出一个已完成的事件
     let disposeBag = DisposeBag()
     
     Observable<Int>.empty()
@@ -47,6 +49,7 @@ example("empty") {
  Creates an `Observable` sequence with a single element. [More info](http://reactivex.io/documentation/operators/just.html)
  */
 example("just") {
+    //用单个元素创建一个可观察的序列
     let disposeBag = DisposeBag()
     // just:单次
     Observable.just("🔴")
@@ -100,6 +103,7 @@ example("create") {
     let disposeBag = DisposeBag()
     //自定义可观察序列
     let myJust = { (element: String) -> Observable<String> in
+        //create
         return Observable.create { observer in
             observer.on(.next(element))
             observer.on(.completed)
@@ -129,6 +133,7 @@ example("range") {
  Creates an `Observable` sequence that emits the given element indefinitely. [More info](http://reactivex.io/documentation/operators/repeat.html)
  */
 example("repeatElement") {
+    //创建一个可观察的序列，该序列无限地发出给定的元素
     let disposeBag = DisposeBag()
     //指定重复次数
     Observable.repeatElement("🔴")
@@ -143,6 +148,7 @@ example("repeatElement") {
  Creates an `Observable` sequence that generates values for as long as the provided condition evaluates to `true`.
  */
 example("generate") {
+    //创建一个可观察的序列，只要提供的条件计算为true，该序列就生成值
     let disposeBag = DisposeBag()
     //生成：初始值，条件 迭代
     Observable.generate(
@@ -159,6 +165,7 @@ example("generate") {
  Creates a new `Observable` sequence for each subscriber. [More info](http://reactivex.io/documentation/operators/defer.html)
  */
 example("deferred") {
+    //为每个订阅服务器创建一个新的可观察序列
     //deferred：延期
     let disposeBag = DisposeBag()
     var count = 1
@@ -190,6 +197,7 @@ example("deferred") {
  Creates an `Observable` sequence that emits no items and immediately terminates with an error.
  */
 example("error") {
+    //创建一个可观察的序列，该序列不发出任何项，并立即终止。
     //错误：error
     let disposeBag = DisposeBag()
         

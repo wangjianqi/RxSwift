@@ -16,6 +16,7 @@ struct Colors {
 }
 
 extension Reactive where Base: UINavigationController {
+    //设置barTintColor
     var isOffline: Binder<Bool> {
         return Binder(base) { navigationController, isOffline in
             navigationController.navigationBar.barTintColor = isOffline

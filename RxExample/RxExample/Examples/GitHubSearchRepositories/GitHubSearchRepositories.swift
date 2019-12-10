@@ -15,6 +15,7 @@ enum GitHubCommand {
 struct GitHubSearchRepositoriesState {
     // control
     var searchText: String
+    //是否加载下一页
     var shouldLoadNextPage: Bool
     var repositories: Version<[Repository]> // Version is an optimization. When something unrelated changes, we don't want to reload table view.
     var nextURL: URL?
