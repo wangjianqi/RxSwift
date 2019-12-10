@@ -43,7 +43,7 @@ class WikipediaSearchViewController: ViewController {
 
         let results = searchBar.rx.text.orEmpty
             .asDriver()
-            //
+            //throttle：节流
             .throttle(.milliseconds(300))
             .distinctUntilChanged()
             .flatMapLatest { query in
@@ -59,16 +59,18 @@ class WikipediaSearchViewController: ViewController {
 
         results
             .drive(resultsTableView.rx.items(cellIdentifier: "WikipediaSearchCell", cellType: WikipediaSearchCell.self)) { (_, viewModel, cell) in
+                //给cell赋值
                 cell.viewModel = viewModel
             }
             .disposed(by: disposeBag)
-
+        //是否隐藏
         results
             .map { $0.count != 0 }
             .drive(self.emptyView.rx.isHidden)
             .disposed(by: disposeBag)
     }
 
+    //滑动隐藏键盘
     func configureKeyboardDismissesOnScroll() {
         let searchBar = self.searchBar
         
@@ -84,7 +86,7 @@ class WikipediaSearchViewController: ViewController {
 
     func configureNavigateOnRowClick() {
         let wireframe = DefaultWireframe.shared
-
+        //点击cell
         resultsTableView.rx.modelSelected(SearchResultViewModel.self)
             .asDriver()
             .drive(onNext: { searchResult in
@@ -93,6 +95,7 @@ class WikipediaSearchViewController: ViewController {
             .disposed(by: disposeBag)
     }
 
+    //是否显示loading
     func configureActivityIndicatorsShow() {
         Driver.combineLatest(
             DefaultWikipediaAPI.sharedAPI.loadingWikipediaData,

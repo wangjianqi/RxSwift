@@ -21,9 +21,11 @@ class Dependencies {
     static let sharedDependencies = Dependencies() // Singleton
     
     let URLSession = Foundation.URLSession.shared
+    //后台线程
     let backgroundWorkScheduler: ImmediateSchedulerType
     let mainScheduler: SerialDispatchQueueScheduler
     let wireframe: Wireframe
+    //网络状态
     let reachabilityService: ReachabilityService
     
     private init() {
@@ -31,6 +33,7 @@ class Dependencies {
         
         let operationQueue = OperationQueue()
         operationQueue.maxConcurrentOperationCount = 2
+        //优先级
         operationQueue.qualityOfService = QualityOfService.userInitiated
         backgroundWorkScheduler = OperationQueueScheduler(operationQueue: operationQueue)
         

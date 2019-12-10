@@ -16,6 +16,7 @@ public enum ReachabilityStatus {
 }
 
 extension ReachabilityStatus {
+    //网络可用
     var reachable: Bool {
         switch self {
         case .reachable:
@@ -75,9 +76,11 @@ class DefaultReachabilityService
 }
 
 extension ObservableConvertibleType {
+    //网络
     func retryOnBecomesReachable(_ valueOnFailure:Element, reachabilityService: ReachabilityService) -> Observable<Element> {
         return self.asObservable()
             .catchError { (e) -> Observable<Element> in
+                //网络
                 reachabilityService.reachability
                     .skip(1)
                     .filter { $0.reachable }

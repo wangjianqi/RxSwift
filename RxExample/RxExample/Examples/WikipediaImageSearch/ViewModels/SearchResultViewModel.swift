@@ -8,7 +8,7 @@
 
 import RxSwift
 import RxCocoa
-
+//ViewModel
 class SearchResultViewModel {
     let searchResult: WikipediaSearchResult
 
