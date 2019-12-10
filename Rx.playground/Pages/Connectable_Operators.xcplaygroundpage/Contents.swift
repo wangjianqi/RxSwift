@@ -19,12 +19,12 @@ playgroundShouldContinueIndefinitely()
 */
 func sampleWithoutConnectableOperators() {
     printExampleHeader(#function)
-    
+    //时间间隔1s
     let interval = Observable<Int>.interval(.seconds(1), scheduler: MainScheduler.instance)
     
     _ = interval
         .subscribe(onNext: { print("Subscription: 1, Event: \($0)") })
-    
+    //延迟5s执行
     delay(5) {
         _ = interval
             .subscribe(onNext: { print("Subscription: 2, Event: \($0)") })
@@ -41,6 +41,7 @@ func sampleWithoutConnectableOperators() {
  ![](http://reactivex.io/documentation/operators/images/publishConnect.c.png)
  */
 func sampleWithPublish() {
+    //将源可观察序列转换为可连接序列
     printExampleHeader(#function)
     
     let intSequence = Observable<Int>.interval(.seconds(1), scheduler: MainScheduler.instance)
@@ -61,6 +62,24 @@ func sampleWithPublish() {
             .subscribe(onNext: { print("Subscription 3:, Event: \($0)") })
     }
 }
+/*
+ Subscription 1:, Event: 0
+ Subscription 1:, Event: 1
+ Subscription 2:, Event: 1
+ Subscription 1:, Event: 2
+ Subscription 2:, Event: 2
+ Subscription 1:, Event: 3
+ Subscription 2:, Event: 3
+ Subscription 3:, Event: 3
+ Subscription 1:, Event: 4
+ Subscription 2:, Event: 4
+ Subscription 3:, Event: 4
+ Subscription 1:, Event: 5
+ Subscription 2:, Event: 5
+ Subscription 3:, Event: 5
+ Subscription 1:, Event: 6
+
+ */
 
 //sampleWithPublish() // ⚠️ Uncomment to run this example; comment to stop running
 

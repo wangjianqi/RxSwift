@@ -17,7 +17,7 @@ import RxSwift
  */
 example("toArray") {
     let disposeBag = DisposeBag()
-    
+    //转Array
     Observable.range(start: 1, count: 10)
         .toArray()
         .subscribe { print($0) }
@@ -30,6 +30,7 @@ example("toArray") {
  ![](https://raw.githubusercontent.com/kzaher/rxswiftcontent/master/MarbleDiagrams/png/reduce.png)
  */
 example("reduce") {
+    //从一个初始种子值开始，然后对一个可观察序列发出的所有元素应用累加器闭包，并以一个单元素可观察序列的形式返回聚合结果
     let disposeBag = DisposeBag()
     
     Observable.of(10, 100, 1000)
@@ -44,6 +45,7 @@ example("reduce") {
  ![](https://raw.githubusercontent.com/kzaher/rxswiftcontent/master/MarbleDiagrams/png/concat.png)
  */
 example("concat") {
+    //以顺序方式连接来自一个可观察序列的内部可观察序列的元素，在从下一个序列发出元素之前，等待每个序列成功终止。
     let disposeBag = DisposeBag()
     
     let subject1 = BehaviorSubject(value: "🍎")

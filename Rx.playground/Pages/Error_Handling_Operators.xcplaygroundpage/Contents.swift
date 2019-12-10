@@ -16,6 +16,7 @@ Recovers from an Error event by returning an `Observable` sequence that emits a 
 ![](https://raw.githubusercontent.com/kzaher/rxswiftcontent/master/MarbleDiagrams/png/catch.png)
 */
 example("catchErrorJustReturn") {
+    //从错误事件中恢复，方法是返回一个可观察的序列，该序列发出单个元素，然后终止
     let disposeBag = DisposeBag()
     
     let sequenceThatFails = PublishSubject<String>()
@@ -29,6 +30,7 @@ example("catchErrorJustReturn") {
     sequenceThatFails.onNext("😨")
     sequenceThatFails.onNext("😡")
     sequenceThatFails.onNext("🔴")
+    //错误
     sequenceThatFails.onError(TestError.test)
 }
 /*:
@@ -38,6 +40,7 @@ example("catchErrorJustReturn") {
  ![](https://raw.githubusercontent.com/kzaher/rxswiftcontent/master/MarbleDiagrams/png/catch.png)
  */
 example("catchError") {
+    //通过切换到提供的恢复可见序列从错误事件中恢复
     let disposeBag = DisposeBag()
     
     let sequenceThatFails = PublishSubject<String>()
@@ -55,6 +58,7 @@ example("catchError") {
     sequenceThatFails.onNext("😨")
     sequenceThatFails.onNext("😡")
     sequenceThatFails.onNext("🔴")
+    //错误
     sequenceThatFails.onError(TestError.test)
     
     recoverySequence.onNext("😊")
@@ -66,6 +70,7 @@ example("catchError") {
  ![](https://raw.githubusercontent.com/kzaher/rxswiftcontent/master/MarbleDiagrams/png/retry.png)
  */
 example("retry") {
+    //通过无限地重新订阅可观察序列来恢复重复的错误事件
     let disposeBag = DisposeBag()
     var count = 1
     
@@ -100,6 +105,7 @@ Recovers repeatedly from Error events by resubscribing to the `Observable` seque
  ![](https://raw.githubusercontent.com/kzaher/rxswiftcontent/master/MarbleDiagrams/png/retry.png)
  */
 example("retry maxAttemptCount") {
+    //通过重新订阅可观察到的序列，从错误事件中反复恢复，直到重试的最大尝试次数
     let disposeBag = DisposeBag()
     var count = 1
     

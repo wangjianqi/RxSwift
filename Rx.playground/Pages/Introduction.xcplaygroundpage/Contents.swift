@@ -54,7 +54,7 @@ All of these various systems makes our code needlessly complex. Wouldn't it be b
  `Observable`s will not execute their subscription closure unless there is a subscriber. In the following example, the closure of the `Observable` will never be executed, because there are no subscribers:
  */
 example("Observable with no subscribers") {
-    //没有订阅者
+    //没有订阅者，所以不会执行
     _ = Observable<String>.create { observerOfString -> Disposable in
         print("This will never be printed")
         observerOfString.on(.next("😬"))

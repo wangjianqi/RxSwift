@@ -17,6 +17,7 @@ Emits the specified sequence of elements before beginning to emit the elements f
 */
 example("startWith") {
     //在开始从源观察对象发出元素之前，发出指定的元素序列
+    //startWith:谁最后，谁最先执行
     let disposeBag = DisposeBag()
     
     Observable.of("🐶", "🐱", "🐭", "🐹")
@@ -34,6 +35,7 @@ example("startWith") {
  ![](https://raw.githubusercontent.com/kzaher/rxswiftcontent/master/MarbleDiagrams/png/merge.png)
  */
 example("merge") {
+    //将来自源可观察序列的元素组合成一个新的可观察序列，并将在每个源可观察序列发出元素时发出每个元素
     let disposeBag = DisposeBag()
     
     let subject1 = PublishSubject<String>()
@@ -63,6 +65,7 @@ example("merge") {
  ![](https://raw.githubusercontent.com/kzaher/rxswiftcontent/master/MarbleDiagrams/png/zip.png)
  */
 example("zip") {
+    //将多达8个源可见序列组合成一个新的可见序列，并将从组合可见序列中发射出每个源可见序列对应索引处的元素。
     let disposeBag = DisposeBag()
     
     let stringSubject = PublishSubject<String>()
@@ -91,12 +94,12 @@ example("zip") {
  ![](https://raw.githubusercontent.com/kzaher/rxswiftcontent/master/MarbleDiagrams/png/combinelatest.png)
  */
 example("combineLatest") {
-//将8源可观测序列组合成一个新的观测序列,并将开始发出联合观测序列的每个源的最新元素可观测序列一旦所有排放源序列至少有一个元素,并且当源可观测序列发出的任何一个新元素
+//将多达8个源可观测序列组合成一个新的观测序列,并将开始发出联合观测序列的每个源的最新元素可观测序列一旦所有排放源序列至少有一个元素,并且当源可观测序列发出的任何一个新元素
     let disposeBag = DisposeBag()
     
     let stringSubject = PublishSubject<String>()
     let intSubject = PublishSubject<Int>()
-    
+    //Latest
     Observable.combineLatest(stringSubject, intSubject) { stringElement, intElement in
             "\(stringElement) \(intElement)"
         }
@@ -104,16 +107,18 @@ example("combineLatest") {
         .disposed(by: disposeBag)
     
     stringSubject.onNext("🅰️")
-    
+    //B相对A是最新的
     stringSubject.onNext("🅱️")
     intSubject.onNext(1)
-    
+    //2相对1是新的
     intSubject.onNext(2)
-    
+    //AB相对B是新的
     stringSubject.onNext("🆎")
 }
 //: There is also a variant of `combineLatest` that takes an `Array` (or any other collection of `Observable` sequences):
 example("Array.combineLatest") {
+    //还有一个combineLatest的变体，它接受一个数组(或任何其他可观察序列的集合)
+    //???
     let disposeBag = DisposeBag()
     
     let stringObservable = Observable.just("❤️")
@@ -134,13 +139,14 @@ example("Array.combineLatest") {
  ![](https://raw.githubusercontent.com/kzaher/rxswiftcontent/master/MarbleDiagrams/png/switch.png)
  */
 example("switchLatest") {
+    //将可观察序列发出的元素转换为可观察序列，并从最近的内部可观察序列发出元素
     let disposeBag = DisposeBag()
     
     let subject1 = BehaviorSubject(value: "⚽️")
     let subject2 = BehaviorSubject(value: "🍎")
     
     let subjectsSubject = BehaviorSubject(value: subject1)
-        
+    //switchLatest
     subjectsSubject.asObservable()
         .switchLatest()
         .subscribe(onNext: { print($0) })

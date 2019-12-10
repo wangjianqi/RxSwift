@@ -15,6 +15,7 @@ import RxSwift
  Creates a sequence that never terminates and never emits any events. [More info](http://reactivex.io/documentation/operators/empty-never-throw.html)
  */
 example("never") {
+    //创建一个永不终止且永不发出任何事件的序列
     let disposeBag = DisposeBag()
     let neverSequence = Observable<String>.never()
     
@@ -61,7 +62,7 @@ example("just") {
  */
 example("of") {
     let disposeBag = DisposeBag()
-    //固定元素
+    //固定数量元素
     Observable.of("🐶", "🐱", "🐭", "🐹")
         .subscribe(onNext: { element in
             print(element)
@@ -129,7 +130,7 @@ example("range") {
  */
 example("repeatElement") {
     let disposeBag = DisposeBag()
-    //指定次数
+    //指定重复次数
     Observable.repeatElement("🔴")
         .take(3)
         .subscribe(onNext: { print($0) })
@@ -143,7 +144,7 @@ example("repeatElement") {
  */
 example("generate") {
     let disposeBag = DisposeBag()
-    //生成
+    //生成：初始值，条件 迭代
     Observable.generate(
             initialState: 0,
             condition: { $0 < 3 },
@@ -189,7 +190,7 @@ example("deferred") {
  Creates an `Observable` sequence that emits no items and immediately terminates with an error.
  */
 example("error") {
-    //错误
+    //错误：error
     let disposeBag = DisposeBag()
         
     Observable<Int>.error(TestError.test)
@@ -207,6 +208,7 @@ example("doOn") {
     
     Observable.of("🍎", "🍐", "🍊", "🍋")
         .do(onNext: { print("Intercepted:", $0) }, afterNext: { print("Intercepted after:", $0) }, onError: { print("Intercepted error:", $0) }, afterError: { print("Intercepted after error:", $0) }, onCompleted: { print("Completed")  }, afterCompleted: { print("After completed")  })
+        //订阅
         .subscribe(onNext: { print($0) })
         .disposed(by: disposeBag)
 }

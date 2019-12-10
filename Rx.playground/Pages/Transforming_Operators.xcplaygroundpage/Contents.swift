@@ -16,6 +16,7 @@ Operators that transform Next event elements emitted by an `Observable` sequence
 ![](https://raw.githubusercontent.com/kzaher/rxswiftcontent/master/MarbleDiagrams/png/map.png)
 */
 example("map") {
+    //将一个转换闭包应用于由一个可观察序列发出的元素，并返回被转换元素的一个新的可观察序列
     let disposeBag = DisposeBag()
     Observable.of(1, 2, 3)
         .map { $0 * $0 }
@@ -29,6 +30,9 @@ example("map") {
  ![](https://raw.githubusercontent.com/kzaher/rxswiftcontent/master/MarbleDiagrams/png/flatmap.png)
  */
 example("flatMap and flatMapLatest") {
+    /*
+将一个可观察序列发出的元素转换为可观察序列，并将两个可观察序列发出的元素合并为一个可观察序列。这在某些情况下也很有用，例如，当你有一个可观察到的序列它本身会发出可观察到的序列，而你想要能够对任何一个可观察到的序列的新发射做出反应。flatMapLatest和flatMapLatest的区别是，flatMapLatest只发射来自最近的内部可观测序列的元素
+     */
     let disposeBag = DisposeBag()
     
     struct Player {
@@ -43,7 +47,7 @@ example("flatMap and flatMapLatest") {
     let 👧🏼 = Player(score: 90)
     
     let player = BehaviorSubject(value: 👦🏻)
-    
+    //flatMap
     player.asObservable()
         .flatMap { $0.score.asObservable() } // Change flatMap to flatMapLatest and observe change in printed output
         .subscribe(onNext: { print($0) })
@@ -69,8 +73,9 @@ example("flatMap and flatMapLatest") {
  ![](https://raw.githubusercontent.com/kzaher/rxswiftcontent/master/MarbleDiagrams/png/scan.png)
  */
 example("scan") {
+    //从一个初始种子值开始，然后对一个可观察序列发出的每个元素应用累加器闭包，并将每个中间结果作为一个单元素可观察序列返回
     let disposeBag = DisposeBag()
-    
+    //scan(1): 加一
     Observable.of(10, 100, 1000)
         .scan(1) { aggregateValue, newValue in
             aggregateValue + newValue
