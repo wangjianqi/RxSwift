@@ -12,7 +12,7 @@ import Foundation
 import UIKit
 import RxSwift
 import RxCocoa
-
+// Section:泛型
 open class RxTableViewSectionedReloadDataSource<Section: SectionModelType>
     : TableViewSectionedDataSource<Section>
     , RxTableViewDataSourceType {
@@ -23,6 +23,7 @@ open class RxTableViewSectionedReloadDataSource<Section: SectionModelType>
             #if DEBUG
                 self._dataSourceBound = true
             #endif
+            // 添加数据
             dataSource.setSections(element)
             tableView.reloadData()
         }.on(observedEvent)

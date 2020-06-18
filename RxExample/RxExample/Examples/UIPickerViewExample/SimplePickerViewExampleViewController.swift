@@ -24,7 +24,7 @@ final class SimplePickerViewExampleViewController: ViewController {
                 return "\(item)"
             }
             .disposed(by: disposeBag)
-
+        // 选择
         pickerView1.rx.modelSelected(Int.self)
             .subscribe(onNext: { models in
                 print("models selected 1: \(models)")
@@ -48,6 +48,7 @@ final class SimplePickerViewExampleViewController: ViewController {
             .disposed(by: disposeBag)
         
         Observable.just([UIColor.red, UIColor.green, UIColor.blue])
+            //items
             .bind(to: pickerView3.rx.items) { _, item, _ in
                 let view = UIView()
                 view.backgroundColor = item

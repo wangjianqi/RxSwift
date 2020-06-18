@@ -17,13 +17,16 @@ class SimpleTableViewExampleSectionedViewController
 
     let dataSource = RxTableViewSectionedReloadDataSource<SectionModel<String, Double>>(
         //cell
+        // element:SectionModel中double 
         configureCell: { (_, tv, indexPath, element) in
+            //复用cell
             let cell = tv.dequeueReusableCell(withIdentifier: "Cell")!
             cell.textLabel?.text = "\(element) @ row \(indexPath.row)"
             return cell
         },
         //header
         titleForHeaderInSection: { dataSource, sectionIndex in
+            //model:SectionModel中String
             return dataSource[sectionIndex].model
         }
     )
@@ -51,7 +54,7 @@ class SimpleTableViewExampleSectionedViewController
                 ])
             ])
 
-
+        // 绑定
         items
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
@@ -78,7 +81,8 @@ class SimpleTableViewExampleSectionedViewController
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         return .none
     }
-    
+
+
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 40
     }

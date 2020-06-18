@@ -12,7 +12,9 @@ import RxCocoa
 ///结果
 enum ValidationResult {
     case ok(message: String)
+    // 空的
     case empty
+    //验证中
     case validating
     ///失败
     case failed(message: String)
@@ -32,6 +34,7 @@ protocol GitHubAPI {
 protocol GitHubValidationService {
     ///名字验证
     func validateUsername(_ username: String) -> Observable<ValidationResult>
+    //密码
     func validatePassword(_ password: String) -> ValidationResult
     ///确认密码验证
     func validateRepeatedPassword(_ password: String, repeatedPassword: String) -> ValidationResult

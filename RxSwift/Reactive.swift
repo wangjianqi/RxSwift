@@ -48,7 +48,7 @@ public protocol ReactiveCompatible {
     /// Reactive extensions.
     var rx: Reactive<ReactiveBase> { get set }
 }
-
+// 扩展
 extension ReactiveCompatible {
     /// Reactive extensions.
     public static var rx: Reactive<Self>.Type {

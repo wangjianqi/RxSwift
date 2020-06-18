@@ -13,7 +13,7 @@ enum Operator {
     case division
 }
 
-//操作
+//操作：枚举
 enum CalculatorCommand {
     case clear
     case changeSign
@@ -23,7 +23,7 @@ enum CalculatorCommand {
     case addNumber(Character)
     case addDot
 }
-
+//
 enum CalculatorState {
     case oneOperand(screen: String)
     case oneOperandAndOperator(operand: Double, operator: Operator)
@@ -33,7 +33,7 @@ enum CalculatorState {
 extension CalculatorState {
     //初始值
     static let initial = CalculatorState.oneOperand(screen: "0")
-
+    // 屏显
     func mapScreen(transform: (String) -> String) -> CalculatorState {
         switch self {
         case let .oneOperand(screen):
@@ -70,7 +70,7 @@ extension CalculatorState {
 
 
 extension CalculatorState {
-    // reduce
+    // reduce:当命令产生时，将它应用到当前状态上，然后生成新的状态
     static func reduce(state: CalculatorState, _ x: CalculatorCommand) -> CalculatorState {
         switch x {
         case .clear:

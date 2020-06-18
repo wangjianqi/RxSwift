@@ -65,7 +65,7 @@ example("just") {
  */
 example("of") {
     let disposeBag = DisposeBag()
-    //固定数量元素
+    //用固定数量的元素创建一个可观察的序列
     Observable.of("🐶", "🐱", "🐭", "🐹")
         .subscribe(onNext: { element in
             print(element)
@@ -101,7 +101,7 @@ example("from") {
 */
 example("create") {
     let disposeBag = DisposeBag()
-    //自定义可观察序列
+    //自定义可观察序列:参数类型String
     let myJust = { (element: String) -> Observable<String> in
         //create
         return Observable.create { observer in

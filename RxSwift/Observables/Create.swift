@@ -72,7 +72,7 @@ final private class AnonymousObservable<Element>: Producer<Element> {
     init(_ subscribeHandler: @escaping SubscribeHandler) {
         self._subscribeHandler = subscribeHandler
     }
-
+    // 重写父类的run方法
     override func run<Observer: ObserverType>(_ observer: Observer, cancel: Cancelable) -> (sink: Disposable, subscription: Disposable) where Observer.Element == Element {
         let sink = AnonymousObservableSink(observer: observer, cancel: cancel)
         let subscription = sink.run(self)

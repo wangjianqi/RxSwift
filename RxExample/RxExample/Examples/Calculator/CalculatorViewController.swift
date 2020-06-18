@@ -15,9 +15,11 @@ class CalculatorViewController: ViewController {
     @IBOutlet weak var lastSignLabel: UILabel!
     //结果
     @IBOutlet weak var resultLabel: UILabel!
-    
+    //清除
     @IBOutlet weak var allClearButton: UIButton!
+    //改变符号
     @IBOutlet weak var changeSignButton: UIButton!
+    //%
     @IBOutlet weak var percentButton: UIButton!
     
     @IBOutlet weak var divideButton: UIButton!
@@ -41,14 +43,15 @@ class CalculatorViewController: ViewController {
     
     override func viewDidLoad() {
         typealias FeedbackLoop = (ObservableSchedulerContext<CalculatorState>) -> Observable<CalculatorCommand>
-
+        // UI反馈
         let uiFeedback: FeedbackLoop = bind(self) { this, state in
             let subscriptions = [
                 state.map { $0.screen }.bind(to: this.resultLabel.rx.text),
                 state.map { $0.sign }.bind(to: this.lastSignLabel.rx.text)
             ]
-
+            // 事件：合成命令序列
             let events: [Observable<CalculatorCommand>] = [
+                    //通过使用 map 方法将按钮点击事件转换为对应的命令
                     this.allClearButton.rx.tap.map { _ in .clear },
 
                     this.changeSignButton.rx.tap.map { _ in .changeSign },
@@ -81,6 +84,7 @@ class CalculatorViewController: ViewController {
         Observable.system(
             initialState: CalculatorState.initial,
             reduce: CalculatorState.reduce,
+            //线程
             scheduler: MainScheduler.instance,
             scheduledFeedback: uiFeedback
         )

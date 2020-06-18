@@ -29,6 +29,8 @@ class SimpleValidationViewController : ViewController {
         usernameValidOutlet.text = "Username has to be at least \(minimalUsernameLength) characters"
         passwordValidOutlet.text = "Password has to be at least \(minimalPasswordLength) characters"
 
+        //“我们用 usernameValid 来控制用户名提示语是否隐藏以及密码输入框是否可用。shareReplay 就是让他们共享这一个源，而不是为他们单独创建新的源。这样可以减少不必要的开支”
+
         let usernameValid = usernameOutlet.rx.text.orEmpty
             .map { $0.count >= minimalUsernameLength }
             .share(replay: 1) // without this map would be executed once for each binding, rx is stateless by default
@@ -41,7 +43,11 @@ class SimpleValidationViewController : ViewController {
         let everythingValid = Observable.combineLatest(usernameValid, passwordValid) { $0 && $1 }
             .share(replay: 1)
 
+        //“disposed(by: disposeBag) 是用来做什么的？
+
+        //和我们所熟悉的对象一样，每一个绑定也是有生命周期的。并且这个绑定是可以被清除的。disposed(by: disposeBag)就是将绑定的生命周期交给 disposeBag 来管理。当 disposeBag 被释放的时候，那么里面尚未清除的绑定也就被清除了。这就相当于是在用 ARC 来管理绑定的生命周期。 这个内容会在 Disposable 章节详细介绍”
         ///账号绑定密码框： isEnable
+        //用户命是否有效绑定密码输入框是否可用
         usernameValid
             .bind(to: passwordOutlet.rx.isEnabled)
             .disposed(by: disposeBag)
@@ -55,7 +61,7 @@ class SimpleValidationViewController : ViewController {
             .bind(to: passwordValidOutlet.rx.isHidden)
             .disposed(by: disposeBag)
 
-        ///合并之后绑定按钮
+        ///合并之后绑定按钮是否可用
         everythingValid
             .bind(to: doSomethingOutlet.rx.isEnabled)
             .disposed(by: disposeBag)

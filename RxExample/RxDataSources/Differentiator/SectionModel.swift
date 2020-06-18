@@ -9,6 +9,7 @@
 import Foundation
 
 //Section泛型
+//ItemType泛型
 public struct SectionModel<Section, ItemType> {
     public var model: Section
     public var items: [Item]

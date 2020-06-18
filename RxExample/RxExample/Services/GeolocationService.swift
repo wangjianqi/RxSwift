@@ -24,7 +24,7 @@ class GeolocationService {
         
         locationManager.distanceFilter = kCLDistanceFilterNone
         locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
-        
+        ///deferred:延期的
         authorized = Observable.deferred { [weak locationManager] in
                 //权限状态
                 let status = CLLocationManager.authorizationStatus()

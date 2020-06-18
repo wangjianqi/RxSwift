@@ -58,6 +58,7 @@ example("Observable with no subscribers") {
     _ = Observable<String>.create { observerOfString -> Disposable in
         print("This will never be printed")
         observerOfString.on(.next("😬"))
+        //完成
         observerOfString.on(.completed)
         return Disposables.create()
     }
@@ -73,10 +74,15 @@ example("Observable with subscriber") {
             observerOfString.on(.next("😉"))
             observerOfString.on(.completed)
             return Disposables.create()
-        }
+        }//订阅
         .subscribe { event in
             print(event)
     }
+}
+
+/// 测试
+example("测试") {
+    print("测试")
 }
 /*:
  > Don't concern yourself with the details of how these `Observable`s were created in these examples. We'll get into that [next](@next).

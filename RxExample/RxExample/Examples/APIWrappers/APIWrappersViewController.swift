@@ -177,6 +177,7 @@ class APIWrappersViewController: ViewController {
         // MARK: UITextView
 
         // also test two way binding
+        //TextView
         let textViewValue = BehaviorRelay(value: "")
         _ = textView.rx.textInput <-> textViewValue
 
@@ -185,7 +186,7 @@ class APIWrappersViewController: ViewController {
                 self?.debug("UITextView text \(x)")
             })
             .disposed(by: disposeBag)
-
+        //TextView
         let attributedTextViewValue = BehaviorRelay<NSAttributedString?>(value: NSAttributedString(string: ""))
         _ = textView2.rx.attributedText <-> attributedTextViewValue
 
@@ -221,7 +222,7 @@ class APIWrappersViewController: ViewController {
 
 
     }
-
+    //打印
     func debug(_ string: String) {
         print(string)
         debugLabel.text = string

@@ -37,6 +37,7 @@ class GitHubSignupViewController1 : ViewController {
             dependency: (
                 API: GitHubDefaultAPI.sharedAPI,
                 validationService: GitHubDefaultValidationService.sharedValidationService,
+                //弹框相关
                 wireframe: DefaultWireframe.shared
             )
         )

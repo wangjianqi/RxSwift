@@ -67,6 +67,7 @@ class GithubSignupViewModel1 {
         validatedUsername = input.username
             //flatMap
             .flatMapLatest { username in
+                //名字
                 return validationService.validateUsername(username)
                     .observeOn(MainScheduler.instance)
                     .catchErrorJustReturn(.failed(message: "Error contacting server"))
@@ -79,7 +80,7 @@ class GithubSignupViewModel1 {
                 return validationService.validatePassword(password)
             }
             .share(replay: 1)
-
+        //确认密码
         validatedPasswordRepeated = Observable.combineLatest(input.password, input.repeatedPassword, resultSelector: validationService.validateRepeatedPassword)
             .share(replay: 1)
 

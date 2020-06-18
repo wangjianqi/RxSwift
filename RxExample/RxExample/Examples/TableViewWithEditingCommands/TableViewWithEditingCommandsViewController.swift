@@ -174,9 +174,11 @@ class TableViewWithEditingCommandsViewController: ViewController, UITableViewDel
             titleForHeaderInSection: { dataSource, sectionIndex in
                 return dataSource[sectionIndex].model
             },
+            //能编辑
             canEditRowAtIndexPath: { (ds, ip) in
                 return true
             },
+            //能移动
             canMoveRowAtIndexPath: { _, _ in
                 return true
             }
