@@ -72,6 +72,7 @@ struct GithubQuery: Equatable {
  This method contains the gist of paginated GitHub search.
  
  */
+// 方法
 func githubSearchRepositories(
         searchText: Signal<String>,
         loadNextPageTrigger: @escaping (Driver<GitHubSearchRepositoriesState>) -> Signal<()>,
@@ -79,7 +80,7 @@ func githubSearchRepositories(
     ) -> Driver<GitHubSearchRepositoriesState> {
 
 
-
+    // feedback
     let searchPerformerFeedback: (Driver<GitHubSearchRepositoriesState>) -> Signal<GitHubCommand> = react(
         query: { (state) in
             GithubQuery(searchText: state.searchText, shouldLoadNextPage: state.shouldLoadNextPage, nextURL: state.nextURL)

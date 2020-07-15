@@ -23,10 +23,10 @@ class NumbersViewController: ViewController {
         ///合并
         /// orEmpty:
         /// text类型：ControlProperty
-        Observable.combineLatest(number1.rx.text.orEmpty, number2.rx.text.orEmpty, number3.rx.text.orEmpty) { textValue1, textValue2, textValue3 -> Int in
+        Observable.combineLatest(number1.rx.text.orEmpty, number2.rx.text.orEmpty, number3.rx.text.orEmpty) { textValue1, textValue2, textValue3 -> Int in//返回类似是int
                 return (Int(textValue1) ?? 0) + (Int(textValue2) ?? 0) + (Int(textValue3) ?? 0)
             }
-            .map { $0.description }
+            .map { $0.description }//这里是int的属性
             // 绑定到result
             .bind(to: result.rx.text)
             .disposed(by: disposeBag)

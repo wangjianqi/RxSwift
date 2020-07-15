@@ -42,9 +42,14 @@ class CalculatorViewController: ViewController {
     @IBOutlet weak var nineButton: UIButton!
     
     override func viewDidLoad() {
+        //一个闭包
+        //
         typealias FeedbackLoop = (ObservableSchedulerContext<CalculatorState>) -> Observable<CalculatorCommand>
+        //使用RxFeedback
         // UI反馈
         let uiFeedback: FeedbackLoop = bind(self) { this, state in
+
+            //显示相关
             let subscriptions = [
                 state.map { $0.screen }.bind(to: this.resultLabel.rx.text),
                 state.map { $0.sign }.bind(to: this.lastSignLabel.rx.text)
@@ -86,6 +91,7 @@ class CalculatorViewController: ViewController {
             reduce: CalculatorState.reduce,
             //线程
             scheduler: MainScheduler.instance,
+            //
             scheduledFeedback: uiFeedback
         )
             .subscribe()

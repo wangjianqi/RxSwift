@@ -20,17 +20,18 @@ struct Version<Value>: Hashable {
         self._unique = Unique()
         self.value = value
     }
-
+    // Hashable
     func hash(into hasher: inout Hasher) {
         hasher.combine(self._unique)
     }
-
+    // Equatable
     static func == (lhs: Version<Value>, rhs: Version<Value>) -> Bool {
         return lhs._unique === rhs._unique
     }
 }
 
 extension Version {
+    // 变形
     func mutate(transform: (inout Value) -> Void) -> Version<Value> {
         var newSelf = self.value
         transform(&newSelf)

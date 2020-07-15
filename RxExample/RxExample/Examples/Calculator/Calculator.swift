@@ -113,7 +113,7 @@ extension Operator {
         case .division:         return "/"
         }
     }
-    
+    //计算
     var perform: (Double, Double) -> Double {
         switch self {
         case .addition:         return (+)

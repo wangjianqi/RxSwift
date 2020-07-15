@@ -36,7 +36,7 @@ extension Repository {
         return "\(name) | \(url)"
     }
 }
-
+// 错误枚举
 enum GitHubServiceError: Error {
     case offline
     case githubLimitReached

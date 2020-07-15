@@ -15,15 +15,18 @@ class SimpleTableViewExampleSectionedViewController
     , UITableViewDelegate {
     @IBOutlet weak var tableView: UITableView!
 
+    //配置
     let dataSource = RxTableViewSectionedReloadDataSource<SectionModel<String, Double>>(
         //cell
-        // element:SectionModel中double 
+        // element:SectionModel中double
+        //配置cell
         configureCell: { (_, tv, indexPath, element) in
             //复用cell
             let cell = tv.dequeueReusableCell(withIdentifier: "Cell")!
             cell.textLabel?.text = "\(element) @ row \(indexPath.row)"
             return cell
         },
+        //配置Section的标题
         //header
         titleForHeaderInSection: { dataSource, sectionIndex in
             //model:SectionModel中String
@@ -35,7 +38,8 @@ class SimpleTableViewExampleSectionedViewController
         super.viewDidLoad()
 
         let dataSource = self.dataSource
-
+        //数据源
+        //just:唯一的元素
         let items = Observable.just([
             SectionModel(model: "First section", items: [
                     1.0,

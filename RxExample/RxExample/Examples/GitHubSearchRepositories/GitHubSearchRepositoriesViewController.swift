@@ -40,6 +40,7 @@ class GitHubSearchRepositoriesViewController: ViewController, UITableViewDelegat
         super.viewDidLoad()
 
         let tableView: UITableView = self.tableView
+        // 加载下一页
         let loadNextPageTrigger: (Driver<GitHubSearchRepositoriesState>) -> Signal<()> =  { state in
             tableView.rx.contentOffset.asDriver()
                 .withLatestFrom(state)
@@ -49,7 +50,7 @@ class GitHubSearchRepositoriesViewController: ViewController, UITableViewDelegat
                         : Signal.empty()
                 }
         }
-
+        // 网络指示器
         let activityIndicator = ActivityIndicator()
 
         let searchBar: UISearchBar = self.searchBar
@@ -73,7 +74,8 @@ class GitHubSearchRepositoriesViewController: ViewController, UITableViewDelegat
             .map { [SectionModel(model: "Repositories", items: $0.value)] }
             .drive(tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
-
+        // 点击cell
+        // 类型：Repository
         tableView.rx.modelSelected(Repository.self)
             .subscribe(onNext: { repository in
                 UIApplication.shared.openURL(repository.url)
@@ -88,7 +90,7 @@ class GitHubSearchRepositoriesViewController: ViewController, UITableViewDelegat
                 showAlert("Exceeded limit of 10 non authenticated requests per minute for GitHub API. Please wait a minute. :(\nhttps://developer.github.com/v3/#rate-limiting") 
             })
             .disposed(by: disposeBag)
-
+        // 结束编辑
         tableView.rx.contentOffset
             .subscribe { _ in
                 if searchBar.isFirstResponder {

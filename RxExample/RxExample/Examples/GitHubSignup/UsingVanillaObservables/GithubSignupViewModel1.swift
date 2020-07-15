@@ -24,7 +24,7 @@ This is example where view model is mutable. Some consider this to be MVVM, some
 // viewModel
 class GithubSignupViewModel1 {
     // outputs {
-
+    //输出
     let validatedUsername: Observable<ValidationResult>
     let validatedPassword: Observable<ValidationResult>
     let validatedPasswordRepeated: Observable<ValidationResult>
@@ -39,22 +39,28 @@ class GithubSignupViewModel1 {
     let signingIn: Observable<Bool>
 
     // }
-
+    //输入->输出
+    //在init方法内部，将输入转成输出
     init(input: (
+        //输入
             username: Observable<String>,
             password: Observable<String>,
             repeatedPassword: Observable<String>,
             loginTaps: Observable<Void>
         ),
         dependency: (
+        //服务
             API: GitHubAPI,
             validationService: GitHubValidationService,
             wireframe: Wireframe
         )
     ) {
         ///接口
+        //网络服务
         let API = dependency.API
+        //输入验证服务
         let validationService = dependency.validationService
+        //弹框服务
         let wireframe = dependency.wireframe
 
         /**

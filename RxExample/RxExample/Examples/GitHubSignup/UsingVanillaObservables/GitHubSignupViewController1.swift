@@ -25,7 +25,7 @@ class GitHubSignupViewController1 : ViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        //ViewController主要负责数据绑定
         let viewModel = GithubSignupViewModel1(
             ///输入
             input: (

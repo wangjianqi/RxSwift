@@ -165,8 +165,8 @@
 		C8DF92EB1B0B38C0009BCF9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C8DF92E91B0B38C0009BCF9A /* Images.xcassets */; };
 		C8E9D2AF1BD3FD960079D0DB /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80397391BD3E17D009D8B26 /* ActivityIndicator.swift */; };
 		C8F8C48A1C277F460047640B /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F8C4891C277F460047640B /* Calculator.swift */; };
-		EF8128F1226BD61900AE22C2 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C81B3A091BC1C28400EF5A9F /* RxCocoa.framework */; };
-		EF8128F2226BD61900AE22C2 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C81B3A011BC1C28400EF5A9F /* RxSwift.framework */; };
+		EF8128F1226BD61900AE22C2 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C81B3A091BC1C28400EF5A9F /* RxCocoa.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		EF8128F2226BD61900AE22C2 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C81B3A011BC1C28400EF5A9F /* RxSwift.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		EF8128F5226BD97900AE22C2 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C81B3A011BC1C28400EF5A9F /* RxSwift.framework */; };
 		EF8128F6226BD9E700AE22C2 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C81B3A091BC1C28400EF5A9F /* RxCocoa.framework */; };
 /* End PBXBuildFile section */
