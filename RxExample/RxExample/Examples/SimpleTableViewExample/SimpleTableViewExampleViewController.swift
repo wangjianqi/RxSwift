@@ -21,6 +21,7 @@ class SimpleTableViewExampleViewController : ViewController, UITableViewDelegate
         )
 
         //绑定数据 items
+        //row element  cell
         items
             .bind(to: tableView.rx.items(cellIdentifier: "Cell", cellType: UITableViewCell.self)) { (row, element, cell) in
                 cell.textLabel?.text = "\(element) @ row \(row)"

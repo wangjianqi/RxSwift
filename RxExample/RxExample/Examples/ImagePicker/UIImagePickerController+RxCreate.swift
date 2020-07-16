@@ -56,6 +56,7 @@ extension Reactive where Base: UIImagePickerController {
             //弹出
             parent.present(imagePicker, animated: animated, completion: nil)
             observer.on(.next(imagePicker))
+            //Disposables
             return Disposables.create(dismissDisposable, Disposables.create {
                 //Disposables
                     dismissViewController(imagePicker, animated: animated)
