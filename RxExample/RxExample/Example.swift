@@ -17,7 +17,7 @@
 #endif
 
 let MB = 1024 * 1024
-
+//生成Error
 func exampleError(_ error: String, location: String = "\(#file):\(#line)") -> NSError {
     return NSError(domain: "ExampleError", code: -1, userInfo: [NSLocalizedDescriptionKey: "\(location): \(error)"])
 }

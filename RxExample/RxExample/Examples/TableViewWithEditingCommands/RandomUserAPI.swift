@@ -12,7 +12,7 @@ import struct Foundation.URL
 import class Foundation.URLSession
 
 class RandomUserAPI {
-    
+    // 单例
     static let sharedAPI = RandomUserAPI()
     
     private init() {}
@@ -28,7 +28,7 @@ class RandomUserAPI {
                 return try self.parseJSON(json)
             }
     }
-    
+    //解析
     private func parseJSON(_ json: [String: AnyObject]) throws -> [User] {
         guard let results = json["results"] as? [[String: AnyObject]] else {
             throw exampleError("Can't find results")
@@ -41,9 +41,10 @@ class RandomUserAPI {
             let pictures = user["picture"] as? [String: String]
             
             guard let firstName = name?["first"], let lastName = name?["last"], let imageURL = pictures?["medium"] else {
+                //抛出异常
                 throw userParsingError
             }
-            
+            //转成model
             let returnUser = User(
                 firstName: firstName.capitalized,
                 lastName: lastName.capitalized,

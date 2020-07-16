@@ -81,10 +81,12 @@ class TableViewWithEditingCommandsViewController: ViewController, UITableViewDel
             .catchErrorJustReturn(TableViewEditingCommand.setUsers(users: []))
 
         let initialLoadCommand = Observable.just(TableViewEditingCommand.setFavoriteUsers(favoriteUsers: [superMan, watMan]))
+            //让两个或多个Observables按照顺序串连起来
                 .concat(loadFavoriteUsers)
                 .observeOn(MainScheduler.instance)
 
         let uiFeedback: Feedback = bind(self) { this, state in
+            //
             let subscriptions = [
                 state.map {
                         [
@@ -93,6 +95,7 @@ class TableViewWithEditingCommandsViewController: ViewController, UITableViewDel
                         ]
                     }
                     .bind(to: this.tableView.rx.items(dataSource: this.dataSource)),
+                //绑定点击
                 this.tableView.rx.itemSelected
                     .withLatestFrom(state) { i, latestState in
                         let all = [latestState.favoriteUsers, latestState.users]
@@ -102,11 +105,11 @@ class TableViewWithEditingCommandsViewController: ViewController, UITableViewDel
                         this?.showDetailsForUser(user)
                     }),
             ]
-
+            //events
             let events: [Observable<TableViewEditingCommand>] = [
 
                 this.tableView.rx.itemDeleted.map(TableViewEditingCommand.deleteUser),
-                this.tableView .rx.itemMoved.map({ val in return TableViewEditingCommand.moveUser(from: val.0, to: val.1) })
+                this.tableView.rx.itemMoved.map({ val in return TableViewEditingCommand.moveUser(from: val.0, to: val.1) })
             ]
 
             return Bindings(subscriptions: subscriptions, events: events)
